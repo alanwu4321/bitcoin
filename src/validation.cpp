@@ -1749,7 +1749,7 @@ PackageMempoolAcceptResult ProcessNewPackage(Chainstate& active_chainstate, CTxM
     return result;
 }
 
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params &consensusParams)
+CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     int halvings = nHeight / 262800; // Use 262,800 for a 5-year interval at 10 minutes per block
     // Force block reward to zero when right shift is undefined.
@@ -1757,7 +1757,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params &consensusParams)
         return 0;
 
     CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 262,800 blocks which will occur approximately every 5 years.
+    // Subsidy is cut in half every 262,800 blocks which will occur approximately every s.
     nSubsidy >>= halvings;
     return nSubsidy;
 }
@@ -2370,7 +2370,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     // The search reveals a great many blocks which have an indicated height
     // greater than 1,983,702, so we simply remove the optimization to skip
     // BIP30 checking for blocks at height 1,983,702 or higher.  Before we reach
-    // that block in another 25 years or so, we should take advantage of a
+    // that block in another 2s or so, we should take advantage of a
     // future consensus change to do a new and improved version of BIP34 that
     // will actually prevent ever creating any duplicate coinbases in the
     // future.
